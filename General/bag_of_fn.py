@@ -8,7 +8,7 @@ The functions are:
 5. 3-Jaccard Index
 6. 3-Salton Index
 7. 3-Sorensen Index
-8. Preferential Attachment (PA)
+8. Class Identifier (create_array)
 
 '''
 
@@ -76,14 +76,15 @@ def sorensen_3_paths(graph, node_u, node_v, num):
     return 2 * num / (degree_u + degree_v)
 
 
-def PA(node_u, node_v, graph):
-    try:
-        degree_u = len(list(nx.neighbors(graph, node_u)))
-        degree_v = len(list(nx.neighbors(graph, node_v)))
-        result = degree_u * degree_v
-    except:
-        result = 0
-    return result
+def create_array(x, y):
+    x, y = int(x), int(y)
+    arr = np.zeros(6)
+    if x == y:
+        arr[x] = 1
+    elif x != y:
+        arr[x] = arr[y] = 1
+    return arr
+
 
 
 
