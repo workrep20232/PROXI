@@ -18,7 +18,8 @@ def database(m, keyword, Y, sub_graph):
                + 'Jaccard' + "\t" + 'Salton' + "\t" + 'Sorensen' + "\t" + '3-Jaccard' + "\t" + '3-Salton' + "\t"
                + '3-Sorensen' + "\t"
                + "field of u" + "\t" + "field of v"
-               + "\t" + "K-norm" +  "\t" + "Preferential Attachment"
+               + "\t" + "K-norm" 
+               + "class1" + "\t" + "class2" + "\t" + "class3" + "\t" + "class4" + "\t" + "class5" + "\t" + "class6"
                + "\t" + "Adamic Andar"
                + "\t" + "label" + "\n")
 
@@ -68,8 +69,6 @@ def database(m, keyword, Y, sub_graph):
         except:
             K_norm = 0
 
-        pa = PA(i, j, sub_graph)
-
         C = 1 if Y[i] == Y[j] else 0
 
         try:
@@ -77,12 +76,15 @@ def database(m, keyword, Y, sub_graph):
         except:
             A = 0
 
+        Cl = create_array(Y[i], Y[j])
+
         file.write(name + "\t" + str(i) + "\t" + str(j) + "\t" + str(K) + "\t" + str(C) + "\t"
                    + str(s_data[k, 2]) + "\t" + str(s_data[k, 3]) + "\t" + str(s_data[k, 4]) + "\t"
                    + str(F1) + "\t" + str(F2) + "\t" + str(F3) + "\t"
                    + str(F4) + "\t" + str(F5) + "\t" + str(F6) + "\t"
                    + str(Y[i]) + "\t" + str(Y[j])
-                   + "\t" + str(K_norm) + "\t" + str(pa)
+                   + "\t" + str(K_norm) 
+                   + str(Cl[0]) + "\t" + str(Cl[1]) + "\t" + str(Cl[2]) + "\t" + str(Cl[3]) + "\t" + str(Cl[4])+ "\t" + str(Cl[5])
                    + "\t" + str(A) + "\t" + str(s_data[k, 5]) + "\n")
 
     file.close()
