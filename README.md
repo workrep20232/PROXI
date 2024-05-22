@@ -1,4 +1,4 @@
-# BFLP: Bag of Features for Link Prediction
+# PROXI: Challenging the GNNs for Link Prediction
 
 This repository contains the code implementation for generating feature vectors used in link prediction tasks.
 
