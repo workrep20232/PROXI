@@ -1,3 +1,20 @@
+def count_simple_paths_for_edge(adj_matrix, u, v):
+    n = len(adj_matrix)
+    
+    # Directly find neighbors of u and v
+    neighbors_u = [x for x in range(n) if adj_matrix[u][x] == 1 and x != v]
+    neighbors_v = [y for y in range(n) if adj_matrix[v][y] == 1 and y != u]
+    
+    # Count pairs (x, y) where A[x][y] == 1
+    count_3paths = sum(1 for x in neighbors_u for y in neighbors_v if adj_matrix[x][y] == 1)
+    count_2paths = sum(1 for x in neighbors_u if adj_matrix[x][v] == 1)
+    
+    return count_2paths, count_3paths
+
+
+
+
+
 def gr_paths(m, sub_graph, all_edges, G):
 
     '''
@@ -26,20 +43,7 @@ def gr_paths(m, sub_graph, all_edges, G):
                 path = nx.shortest_path(sub_graph, i, j)
             except:
                 path = [0]
-        try:
-            paths1 = len(list(nx.all_simple_paths(sub_graph, source=i, target=j, cutoff=1)))
-        except:
-            paths1 = 0
-
-        try:
-            paths2 = len(list(nx.all_simple_paths(sub_graph, source=i, target=j, cutoff=2))) - paths1
-        except:
-            paths2 = 0
-
-        try:
-            paths3 = len(list(nx.all_simple_paths(sub_graph, source=i, target=j, cutoff=3))) - paths1 - paths2
-        except:
-            paths3 = 0
+        paths2, paths3 = count_simple_paths_for_edge(A, i, j)
 
         if G.has_edge(i, j) or G.has_edge(j, i):
             label = 1
